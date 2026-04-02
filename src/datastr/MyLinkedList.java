@@ -219,7 +219,12 @@ public class MyLinkedList<Ttype> {
 		return foundPositions;
 	}
 	
-	
+	public void makeEmpty() {
+		firstNode = null;
+		lastNode = null;
+		howManyElements = 0;
+		System.gc();
+	}
 	
 	
 	

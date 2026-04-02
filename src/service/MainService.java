@@ -40,6 +40,18 @@ public class MainService {
 			symbols.add('Q');
 			System.out.println(symbols.search('Q'));
 			
+			//make empty
+			System.out.println("========= ATVRIVO SARAKSTU =============");
+			symbols.makeEmpty();
+			symbols.add('E');
+			symbols.print();
+			
+			//ar studentiem
+			System.out.println("========= STUDENTI =============");
+			
+			
+			
+			
 			
 		}
 		catch (Exception e) {
