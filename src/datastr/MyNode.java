@@ -19,7 +19,7 @@ public class MyNode<Ttype> {
 
 	//setters
 	public void setElement(Ttype inputElement) {
-		if(element != null) {
+		if(inputElement != null) {
 			element = inputElement;
 		}
 		else {

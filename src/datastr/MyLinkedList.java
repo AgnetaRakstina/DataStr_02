@@ -10,7 +10,7 @@ public class MyLinkedList<Ttype> {
 		return howManyElements;
 	}
 	
-	//firstNode un lastNode nataisam ne set ne get, jo nelausim lietotajam 
+	//firstNode un lastNode netaisam ne set ne get, jo nelausim lietotajam 
 	//pieklut vai mainit blokus
 	
 	//bezargumenta konstruktors bus no object klases,
@@ -55,12 +55,6 @@ public class MyLinkedList<Ttype> {
 		}
 	}
 	
-	//TODO 
-	// izveidot add funkciju kura padod elementu un poziciju kur ielikt
-	// veikt nepieciesamas parbaudes 
-	// ja velas pievienot 0 pozicija
-	// ja velas pievienot beigas
-	// ja velas pievienot pa vidu
 	public void  add(Ttype element, int position) throws Exception {
 		if(isFull()) {
 			throw new Exception("Saraksts ir pilns un nav iespejams pieveinot elementu");
@@ -91,15 +85,31 @@ public class MyLinkedList<Ttype> {
 		}
 		//ja velas pievienot pa vidu
 		else {
+			MyNode<Ttype> newNode = new MyNode<Ttype>(element);
+			
+			//veicam lecienu lidz pozicijai -1
+			MyNode<Ttype> currentNode = firstNode;// TODO noskaidrot no kuras
+			
+			for(int i = 1; i <= position-1; i++) {
+				currentNode = currentNode.getNextNode();
+			}
+			
+			MyNode<Ttype> leftNode = currentNode;
+			MyNode<Ttype> rightNode = leftNode.getNextNode();
+			
+			leftNode.setNextNode(newNode);
+			newNode.setPreviousNode(leftNode);
+			
+			rightNode.setPreviousNode(newNode);
+			newNode.setNextNode(rightNode);
+			
+			howManyElements++;
 			
 		}
 		
 		
 	}
-	
-	
-	
-	
+
 	public void print() throws Exception {
 		if(isEmpty()) {
 			throw new Exception("Saraksta nav elementu, lidz ar to nevar neko izprintet");
@@ -114,6 +124,7 @@ public class MyLinkedList<Ttype> {
 		System.out.println();
 	}
 	
+
 	
 	
 }

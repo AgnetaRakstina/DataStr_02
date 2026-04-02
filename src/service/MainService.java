@@ -3,28 +3,28 @@ package service;
 import datastr.MyLinkedList;
 
 public class MainService {
-	
+
 	public static void main(String[] args) {
 		MyLinkedList<Character> symbols = new MyLinkedList<Character>();
 		
-		try {
-			
-			symbols.add('A');
-			symbols.add('B');
-			symbols.add('C');
-			symbols.print();
-			symbols.add('Z');
-			symbols.add('X', 0); //X A B C Z
-			symbols.print();
-			symbols.add('U', 5); //X A B C Z U
-			
-			
+		try
+		{
+			symbols.add('A');//A
+			symbols.add('B');//B
+			symbols.add('C');//C
+			symbols.print();//A B C
+			symbols.add('Z');//A B C Z
+			symbols.print();//A B C Z
+			symbols.add('X', 0);//X A B C Z
+			symbols.print();//X A B C Z
+			symbols.add('U', 5);//X A B C Z U
+			symbols.print();//X A B C Z U
+			symbols.add('Q', 2);
+			symbols.print(); // X A Q B C Z U
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		
 	}
-	
+
 }
