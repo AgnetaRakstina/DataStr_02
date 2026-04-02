@@ -31,6 +31,16 @@ public class MainService {
 			symbols.remove(2); // A Q C Z
 			symbols.print();
 			
+			
+			//meklesana
+			System.out.println("========= MEKLESANA =============");
+			System.out.println(symbols.search('A'));
+			symbols.add('Q');
+			System.out.println(symbols.search('Q'));
+			symbols.add('Q');
+			System.out.println(symbols.search('Q'));
+			
+			
 		}
 		catch (Exception e) {
 			System.out.println(e.getMessage());

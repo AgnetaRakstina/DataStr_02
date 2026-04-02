@@ -1,5 +1,8 @@
 package datastr;
 
+import java.util.ArrayList;
+
+
 public class MyLinkedList<Ttype> {
 	private MyNode<Ttype> firstNode = null;
 	private MyNode<Ttype> lastNode= null;
@@ -87,11 +90,21 @@ public class MyLinkedList<Ttype> {
 		else {
 			MyNode<Ttype> newNode = new MyNode<Ttype>(element);
 			
-			//veicam lecienu lidz pozicijai -1
-			MyNode<Ttype> currentNode = firstNode;// TODO noskaidrot no kuras
+			MyNode<Ttype> currentNode = null;
 			
-			for(int i = 1; i <= position-1; i++) {
-				currentNode = currentNode.getNextNode();
+			if(position < howManyElements/2) {
+				currentNode = firstNode;
+				for(int i = 1; i <= position-1; i++) {
+					currentNode = currentNode.getNextNode();
+				}
+			}
+			//pozicija ir tuvak pedejam blokam un veic leksanu
+			//no pedeja bloka uz atpakalu
+			else {
+				currentNode = lastNode;
+				for(int i = howManyElements; i > position; i--) {
+					currentNode = currentNode.getPreviousNode();
+				}
 			}
 			
 			MyNode<Ttype> leftNode = currentNode;
@@ -104,19 +117,9 @@ public class MyLinkedList<Ttype> {
 			newNode.setNextNode(rightNode);
 			
 			howManyElements++;
-			
+
 		}
 	}
-
-	//TODO
-	//1. remove by position
-	//2. veicam nepieciesamas parbaudes
-	//3. ja dzesam no prieksas
-	//4. ja dzesam pedejo (position == howmanyElements-1
-	//5. ja jadzess kads elements pa vidu
-	// veicam leksanu lidz tai pozicijai, noskaidrojam bloku, kas pa labi
-	// kas pa kreisi un tas sava starpa saista
-	//6. samazinat how manyelements
 	
 	public void remove(int position) throws Exception {
 		if (isEmpty()) {
@@ -144,7 +147,7 @@ public class MyLinkedList<Ttype> {
 		else {
 			MyNode<Ttype> currentNode = firstNode;
 			
-			for(int i = 1; i < position; i++) {
+			for(int i = 1; i <= position; i++) {
 				currentNode = currentNode.getNextNode();
 			}
 			
@@ -159,11 +162,62 @@ public class MyLinkedList<Ttype> {
 		}
 	}
 	
+	public Ttype get(int position) throws Exception {
+		if(isEmpty()) {
+			throw new Exception("Saraksts ir tukss, lidz ar to nevaram veikt elementa atgriesanu");
+		}
+		else if(position < 0) {
+			throw new Exception("Pozicija nevar but negativa");
+		}
+		else if(position >= howManyElements) {
+			throw new Exception("Pozicija nevar but lielaka vai vienada par elementu skaitu");
+		}
+		
+		MyNode<Ttype> currentNode = null;
+		
+		if(position < howManyElements/2) {
+			currentNode = firstNode;
+			for(int i = 1; i <= position; i++) {
+				currentNode = currentNode.getNextNode();
+			}
+		}
+		else {
+			currentNode = lastNode;
+			for(int i = howManyElements; i > position+1; i--) {
+				currentNode = currentNode.getPreviousNode();
+			}
+		}
+		
+		return currentNode.getElement();
+	}
 	
-	
-	
-	
-	
+	public ArrayList<Integer> search(Ttype element) throws Exception {
+		if(isEmpty()) {
+			throw new Exception("Saraksts ir tukss un nevar neko atgriezt");
+		}
+		else if (element == null) {
+			throw new Exception("Padotais elements nav noradits");
+		}
+		
+		ArrayList<Integer> foundPositions = new ArrayList<Integer>();
+		int tempPosition = 0;
+		MyNode<Ttype> currentNode = firstNode;
+		
+		while(currentNode != null) {
+			if (currentNode.getElement().equals(element)) {
+				foundPositions.add(tempPosition);
+			}
+			tempPosition++;
+			
+			currentNode = currentNode.getNextNode();
+		}
+		
+		if(foundPositions.isEmpty()) {
+			throw new Exception("Nav atrasts neviens tads elements");
+		}
+		
+		return foundPositions;
+	}
 	
 	
 	
