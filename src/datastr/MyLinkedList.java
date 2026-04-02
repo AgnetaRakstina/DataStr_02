@@ -106,10 +106,70 @@ public class MyLinkedList<Ttype> {
 			howManyElements++;
 			
 		}
-		
-		
 	}
 
+	//TODO
+	//1. remove by position
+	//2. veicam nepieciesamas parbaudes
+	//3. ja dzesam no prieksas
+	//4. ja dzesam pedejo (position == howmanyElements-1
+	//5. ja jadzess kads elements pa vidu
+	// veicam leksanu lidz tai pozicijai, noskaidrojam bloku, kas pa labi
+	// kas pa kreisi un tas sava starpa saista
+	//6. samazinat how manyelements
+	
+	public void remove(int position) throws Exception {
+		if (isEmpty()) {
+			throw new Exception("Saraksta nav nevienu elementu");
+		}
+		else if (position < 0) {
+			throw new Exception("Pozicija var but tikai pozitiva");
+		}
+		else if (position >= howManyElements) {
+			throw new Exception("Pozicija nevar but lielaka par esoso elementu skaitu");
+		}
+		
+		// dzess no prieksas
+		if (position == 0) {
+			firstNode = firstNode.getNextNode();
+			firstNode.setPreviousNode(null);
+			
+			howManyElements--;
+		}
+		else if (position == howManyElements-1) {
+			lastNode = lastNode.getPreviousNode();
+			lastNode.setNextNode(null);
+			howManyElements--;
+		}
+		else {
+			MyNode<Ttype> currentNode = firstNode;
+			
+			for(int i = 1; i < position; i++) {
+				currentNode = currentNode.getNextNode();
+			}
+			
+			MyNode<Ttype> leftNode = currentNode.getPreviousNode();
+			MyNode<Ttype> rightNode = currentNode.getNextNode();
+			
+			leftNode.setNextNode(rightNode);
+			rightNode.setPreviousNode(leftNode);
+			
+			howManyElements--;
+
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void print() throws Exception {
 		if(isEmpty()) {
 			throw new Exception("Saraksta nav elementu, lidz ar to nevar neko izprintet");
